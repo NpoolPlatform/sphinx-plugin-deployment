@@ -5,8 +5,8 @@
   become_method: sudo
   tasks:
     - name:
-      shell: 'ls'
-      register: process
-      ignore_errors: true
-    - name: Print processes
-      debug: var=process.stdout_lines
+      shell: 'docker run -itd --name sphinx-plugin-btc --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro entropypool/btc-chain-sphinx:22.0'
+      #      register: process
+      #      ignore_errors: true
+      #    - name: Print processes
+      #      debug: var=process.stdout_lines
