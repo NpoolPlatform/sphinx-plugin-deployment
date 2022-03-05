@@ -4,8 +4,12 @@
   become_user: root
   become_method: sudo
   tasks:
-    - name:
+    - name: pull image
       shell: 'docker pull uhub.service.ucloud.cn/entropypool/btc-chain-sphinx:{{ version }} ; docker run -itd --name sphinx-plugin-btc --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro entropypool/btc-chain-sphinx:{{ version }} ; docker exec -it sphinx-plugin-btc /home/install-btc.sh -u {{ rpcuser }} -p {{ rpcpassword }} -v {{ version }} -P {{ phinxproxyapi }}'
+    - name: docker run
+      shell: 'docker stop sphinx-plugin-btc; docker rm sphinx-plugin-btc ; docker run -itd --name sphinx-plugin-btc --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro entropypool/btc-chain-sphinx:{{ version }} ; docker exec -it sphinx-plugin-btc /home/install-btc.sh -u {{ rpcuser }} -p {{ rpcpassword }} -v {{ version }} -P {{ phinxproxyapi }}'
+    - name: install sphinx plugin btc
+      shell: 'docker exec -it sphinx-plugin-btc /home/install-btc.sh -u {{ rpcuser }} -p {{ rpcpassword }} -v {{ version }} -P {{ phinxproxyapi }}'
       #      register: process
       #      ignore_errors: true
       #    - name: Print processes
