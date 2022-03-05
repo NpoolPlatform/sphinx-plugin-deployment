@@ -4,4 +4,4 @@
 rpcuser=scpc
 rpcpassword=scpc
 version=22.0
-phinx.proxy.api="sphinx.proxy.api.npool.top:80,sphinx.proxy.api.xpool.top:80"
+phinxproxyapi="sphinx.proxy.api.npool.top:80,sphinx.proxy.api.xpool.top:80"
