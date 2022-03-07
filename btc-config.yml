@@ -5,7 +5,7 @@
   become_method: sudo
   tasks:
     - name: pull image
-      shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinxi-plugin:latest'
+      shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
     - name: docker stop btc sphinx plugin
       shell: 'docker stop btc-sphinx-plugin; docker rm btc-sphinx-plugin'
       ignore_errors: true
