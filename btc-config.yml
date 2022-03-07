@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: btc
   user: '{{ ansible_ssh_user }}'
   become: yes
   become_user: root
