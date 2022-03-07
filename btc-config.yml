@@ -1,0 +1,15 @@
+- hosts: all
+  user: '{{ ansible_ssh_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: pull image
+      shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinxi-plugin:{{ btcversion }}'
+    - name: docker stop btc sphinx plugin
+      shell: 'docker stop btc-sphinx-plugin; docker rm btc-sphinx-plugin'
+      ignore_errors: true
+    - name: docker run btc sphinx plugin
+      shell: 'docker run -itd --name btc-sphinx-plugin --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro entropypool/sphinx-plugin:{{ btcversion }}'
+    - name: install btc sphinx plugin
+      shell: 'docker exec -it btc-sphinx-plugin /home/install-btc.sh -u {{ rpcuser }} -p {{ rpcpassword }} -v {{ btcversion }} -P {{ phinxproxyapi }}'
