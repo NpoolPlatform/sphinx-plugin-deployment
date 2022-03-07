@@ -1,7 +1,3 @@
 172.16.31.24 ansible_ssh_user=test ansible_sudo_pass=12345679
 
 [all:vars]
-rpcpassword=scpc
-btcversion=22.0
-phinxproxyapi="sphinx.proxy.api.npool.top:80,sphinx.proxy.api.xpool.top:80"
-traefikip=172.16.31.131

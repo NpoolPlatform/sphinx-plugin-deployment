@@ -12,4 +12,4 @@
     - name: docker run btc sphinx plugin
       shell: 'docker run -itd --name btc-sphinx-plugin --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
     - name: install btc sphinx plugin
-      shell: 'docker exec -it btc-sphinx-plugin /home/install-btc.sh -u rpcuser -p {{ rpcpassword }} -v {{ btcversion }} -P {{ phinxproxyapi }} -t {{ traefikip }}'
+      shell: 'docker exec -it btc-sphinx-plugin /home/install-btc.sh -u rpcuser -p rpcpassword -v btcversion -P phinxproxyapi -t traefikip'
