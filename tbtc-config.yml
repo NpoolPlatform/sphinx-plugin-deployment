@@ -1,4 +1,4 @@
-- hosts: btc
+- hosts: tbtc
   user: '{{ ansible_ssh_user }}'
   become: yes
   become_user: root
@@ -6,10 +6,10 @@
   tasks:
     - name: pull image
       shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
-    - name: docker stop btc sphinx plugin
-      shell: 'docker stop tbtc-sphinx-plugin; docker rm btc-sphinx-plugin'
+    - name: docker stop tbtc sphinx plugin
+      shell: 'docker stop tbtc-sphinx-plugin; docker rm tbtc-sphinx-plugin'
       ignore_errors: true
-    - name: docker run btc sphinx plugin
+    - name: docker run tbtc sphinx plugin
       shell: 'docker run -itd --name tbtc-sphinx-plugin --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
-    - name: install btc sphinx plugin
-      shell: 'docker exec -it tbtc-sphinx-plugin /home/install-btc.sh -u rpcuser -p rpcpassword -v btcversion -P phinxproxyapi -t traefikip'
+    - name: install tbtc sphinx plugin
+      shell: 'docker exec -it tbtc-sphinx-plugin /home/install-tbtc.sh -u rpcuser -p rpcpassword -v btcversion -P phinxproxyapi -t traefikip'
