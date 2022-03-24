@@ -1,0 +1,15 @@
+- hosts: ethereum
+  user: '{{ ansible_ssh_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: pull image
+      shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+    - name: docker stop ethereum sphinx plugin
+      shell: 'docker stop ethereum-sphinx-plugin; docker rm ethereum-sphinx-plugin'
+      ignore_errors: true
+    - name: docker run ethereum sphinx plugin
+      shell: 'docker run -itd --name ethereum-sphinx-plugin --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro datadir/ethereum:/root/.ethereum uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+    - name: install ethereum sphinx plugin
+      shell: 'docker exec -it ethereum-sphinx-plugin /home/install-ethereum.sh -P sphinxproxyapi -t traefikip'

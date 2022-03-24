@@ -12,4 +12,4 @@
     - name: docker run teth sphinx plugin
       shell: 'docker run -itd --name teth-sphinx-plugin --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
     - name: install teth sphinx plugin
-      shell: 'docker exec -it teth-sphinx-plugin /home/install-teth.sh -P phinxproxyapi -t traefikip'
+      shell: 'docker exec -it teth-sphinx-plugin /home/install-teth.sh -P sphinxproxyapi -t traefikip'

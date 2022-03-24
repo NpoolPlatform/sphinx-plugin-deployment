@@ -2,6 +2,10 @@
 
 [teth]
 
+[bitcoin]
+
+[ethereum]
+
 [fil]
 
 [all:vars]
