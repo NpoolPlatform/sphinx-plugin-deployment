@@ -10,6 +10,6 @@
       shell: 'docker stop bitcoin-sphinx-plugin; docker rm bitcoin-sphinx-plugin'
       ignore_errors: true
     - name: docker run bitcoin sphinx plugin
-      shell: 'docker run -itd --name bitcoin-sphinx-plugin --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro datadir/bitcoin:/root/.bitcoin uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+      shell: 'docker run -itd --name bitcoin-sphinx-plugin --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v datadir/bitcoin:/root/.bitcoin uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
     - name: install bitcoin sphinx plugin
       shell: 'docker exec -it bitcoin-sphinx-plugin /home/install-bitcoin.sh -u rpcuser -p rpcpassword -v btcversion -P sphinxproxyapi -t traefikip'
