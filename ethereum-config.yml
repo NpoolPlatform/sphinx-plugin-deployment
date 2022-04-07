@@ -10,6 +10,6 @@
       shell: 'docker stop ethereum-sphinx-plugin; docker rm ethereum-sphinx-plugin'
       ignore_errors: true
     - name: docker run ethereum sphinx plugin
-      shell: 'docker run -itd --name ethereum-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v datadir/ethereum:/root/.ethereum uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+      shell: 'docker run -itd --name ethereum-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
     - name: install ethereum sphinx plugin
-      shell: 'docker exec -it ethereum-sphinx-plugin /home/install-ethereum.sh -P sphinxproxyapi -a allproxy'
+      shell: 'docker exec -it ethereum-sphinx-plugin /home/install-ethereum.sh -P sphinxproxyapi -I hostip -a allproxy'
