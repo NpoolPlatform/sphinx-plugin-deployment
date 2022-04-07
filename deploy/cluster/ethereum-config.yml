@@ -1,0 +1,18 @@
+- hosts: ethereum
+  user: '{{ ansible_ssh_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Send macheine check scripts    
+      copy:                                
+        src: '{{ item.src }}'              
+        dest: '{{ item.dest }}'
+        owner: '{{ ansible_ssh_user }}'    
+        group: '{{ ansible_ssh_user }}'    
+        mode: 0755                         
+        force: yes                         
+      with_items:                          
+      - { src: "../install-ethereum.sh", dest: "/home" }
+    - name: install ethereum sphinx plugin
+      shell: '/home/install-ethereum.sh -D datadir -P sphinxproxyapi -I hostip -a allproxy'

@@ -1,0 +1,15 @@
+- hosts: teth
+  user: '{{ ansible_ssh_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: pull image
+      shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+    - name: docker stop teth sphinx plugin
+      shell: 'docker stop teth-sphinx-plugin; docker rm teth-sphinx-plugin'
+      ignore_errors: true
+    - name: docker run teth sphinx plugin
+      shell: 'docker run -itd --name teth-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v datadir/tethereum:/root/.ethereum uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+    - name: install teth sphinx plugin
+      shell: 'docker exec -it teth-sphinx-plugin /home/install-teth.sh -P sphinxproxyapi -t traefikip -a allproxy'
