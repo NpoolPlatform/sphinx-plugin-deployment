@@ -41,6 +41,7 @@ function install_eth() {
   sleep 10
   cd /home
   info "run geth" >> $LOG_FILE
+  mkdir -p $DATA_DIR/ethereum
   nohup geth --http --datadir $DATA_DIR/ethereum > $DATA_DIR/ethereum/geth.log 2>&1 &
 }
 
