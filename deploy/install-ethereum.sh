@@ -58,15 +58,9 @@ apt install net-tools -y
 netstat -lntup | grep 8545
 if [ $? -eq 0 ]; then
   docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest
-  if [ "$COIN_NET" == "main" ]; then
-    docker stop ethereum-sphinx-plugin; docker rm ethereum-sphinx-plugin
-    docker run -itd --name ethereum-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest
-    docker exec -it ethereum-sphinx-plugin /home/install-ethereum-sphinx-plugin.sh -P $SPHINX_PROXY_ADDR -I $HOST_IP -a $ALL_PROXY
-  elif [ "$COIN_NET" == "test" ]; then
-    docker stop tethereum-sphinx-plugin; docker rm tethereum-sphinx-plugin
-    docker run -itd --name tethereum-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest
-    docker exec -it tethereum-sphinx-plugin /home/install-ethereum-sphinx-plugin.sh -t $TRAEFIK_IP -P $SPHINX_PROXY_ADDR -I $HOST_IP -a $ALL_PROXY
-  fi
+  docker stop ethereum-sphinx-plugin; docker rm ethereum-sphinx-plugin
+  docker run -itd --name ethereum-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest
+  docker exec -it ethereum-sphinx-plugin /home/install-ethereum-sphinx-plugin.sh -P $SPHINX_PROXY_ADDR -I $HOST_IP -a $ALL_PROXY
 else
   install_eth
 fi
