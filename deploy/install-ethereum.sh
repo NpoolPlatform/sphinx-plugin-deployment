@@ -60,7 +60,11 @@ if [ $? -eq 0 ]; then
   docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest
   docker stop ethereum-sphinx-plugin; docker rm ethereum-sphinx-plugin
   docker run -itd --name ethereum-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest
-  docker exec -it ethereum-sphinx-plugin /home/install-ethereum-sphinx-plugin.sh -P $SPHINX_PROXY_ADDR -I $HOST_IP -a $ALL_PROXY
+  if [ "$COIN_NET" == "main" ]; then
+    docker exec -it ethereum-sphinx-plugin /home/install-ethereum-sphinx-plugin.sh -N $COIN_NET -P $SPHINX_PROXY_ADDR -I $HOST_IP -a $ALL_PROXY
+  else
+    docker exec -it ethereum-sphinx-plugin /home/install-ethereum-sphinx-plugin.sh -N $COIN_NET -P $SPHINX_PROXY_ADDR -I $HOST_IP -a $ALL_PROXY -t $TRAEFIK_IP
+  fi
 else
   install_eth
 fi
