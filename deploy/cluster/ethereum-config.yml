@@ -15,4 +15,4 @@
       with_items:                          
       - { src: "../install-ethereum.sh", dest: "/home" }
     - name: install ethereum sphinx plugin
-      shell: '/home/install-ethereum.sh -D datadir -P sphinxproxyapi -I hostip -a allproxy'
+      shell: '/home/install-ethereum.sh -N coinnet -D datadir -P sphinxproxyapi -I hostip -a allproxy'
