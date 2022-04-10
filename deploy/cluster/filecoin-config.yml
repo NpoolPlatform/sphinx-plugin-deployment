@@ -1,0 +1,15 @@
+- hosts: filecoin
+  user: '{{ ansible_ssh_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: pull image
+      shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+    - name: docker stop filecoin sphinx plugin
+      shell: 'docker stop filecoin-sphinx-plugin; docker rm filecoin-sphinx-plugin'
+      ignore_errors: true
+    - name: docker run filecoin sphinx plugin
+      shell: 'docker run -itd --name filecoin-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+    - name: install filecoin sphinx plugin
+      shell: 'docker exec -it filecoin-sphinx-plugin /home/install-filecoin-sphinx-plugin.sh -N coinnet -K cointoken -P sphinxproxyapi -I hostip -a allproxy'
