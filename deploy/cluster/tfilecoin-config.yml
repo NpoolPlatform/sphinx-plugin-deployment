@@ -12,4 +12,4 @@
     - name: docker run tfilecoin sphinx plugin
       shell: 'docker run -itd --name tfilecoin-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
     - name: install filecoin sphinx plugin
-      shell: 'docker exec -it tfilecoin-sphinx-plugin /home/install-filecoin-sphinx-plugin.sh -N coinnet -K cointoken -P sphinxproxyapi -I hostip -a allproxy'
+      shell: 'docker exec -it tfilecoin-sphinx-plugin /home/install-filecoin-sphinx-plugin.sh -N coinnet -K cointoken -t $TRAEFIK_IP -P sphinxproxyapi -I hostip -a allproxy'
