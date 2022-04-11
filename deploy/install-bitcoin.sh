@@ -51,10 +51,11 @@ function install_btc() {
   rm -rf /usr/local/bin/bitcoind /usr/local/bin/bitcoin-cli
   cp bitcoin-$BTC_VERSION/bin/bitcoind /usr/local/bin/
   cp bitcoin-$BTC_VERSION/bin/bitcoin-cli /usr/local/bin/
+  mkdir -p $DATA_DIR/bitcoin
   if [ "$COIN_NET" == "main" ]; then
-    bitcoind -daemon -conf=$DATA_DIR/bitcoin/bitcoin.conf -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD >> $LOG_FILE 2>&1
+    bitcoind -daemon -datadir=$DATA_DIR/bitcoin -conf=$DATA_DIR/bitcoin/bitcoin.conf -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD >> $LOG_FILE 2>&1
   else
-    bitcoind -regtest -addresstype=legacy -daemon -conf=$DATA_DIR/bitcoin/bitcoin.conf -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD >> $LOG_FILE 2>&1
+    bitcoind -regtest -addresstype=legacy -daemon -datadir=$DATA_DIR/bitcoin -conf=$DATA_DIR/bitcoin/bitcoin.conf -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD >> $LOG_FILE 2>&1
     echo "rpcwallet=my_wallet" >> /home/bitcoin.conf
   fi
   sed -i 's/#rpcpassword=.*/rpcpassword='$RPC_PASSWORD'/g' /home/bitcoin.conf
