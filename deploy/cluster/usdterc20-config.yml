@@ -10,6 +10,6 @@
       shell: 'docker stop usdterc20-sphinx-plugin; docker rm usdterc20-sphinx-plugin'
       ignore_errors: true
     - name: docker run usdterc20 sphinx plugin
-      shell: 'docker run -itd --name usdterc20-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+      shell: 'docker run -itd --name usdterc20-sphinx-plugin --restart=always --privileged -v datadir/ethereum/keystore:datadir/ethereum/keystore -v /sys/fs/cgroup:/sys/fs/cgroup:ro uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
     - name: install usdterc20 sphinx plugin
-      shell: 'docker exec -it usdterc20-sphinx-plugin /home/install-usdterc20.sh -N coinnet -t traefikip -P sphinxproxyapi -I hostip -a allproxy'
+      shell: 'docker exec -it usdterc20-sphinx-plugin /home/install-usdterc20-sphinx-plugin.sh -N coinnet -t traefikip -P sphinxproxyapi -I hostip -a allproxy'

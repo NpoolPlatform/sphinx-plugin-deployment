@@ -4,12 +4,15 @@
   become_user: root
   become_method: sudo
   tasks:
-    - name: pull image
-      shell: 'docker pull uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
-    - name: docker stop bitcoin sphinx plugin
-      shell: 'docker stop bitcoin-sphinx-plugin; docker rm bitcoin-sphinx-plugin'
-      ignore_errors: true
-    - name: docker run bitcoin sphinx plugin
-      shell: 'docker run -itd --name bitcoin-sphinx-plugin --restart=always --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v datadir/bitcoin:/root/.bitcoin uhub.service.ucloud.cn/entropypool/sphinx-plugin:latest'
+    - name: Send macheine check scripts    
+      copy:                                
+        src: '{{ item.src }}'              
+        dest: '{{ item.dest }}'
+        owner: '{{ ansible_ssh_user }}'    
+        group: '{{ ansible_ssh_user }}'    
+        mode: 0755                         
+        force: yes                         
+      with_items:                          
+      - { src: "../install-bitcoin.sh", dest: "/home" }
     - name: install bitcoin sphinx plugin
-      shell: 'docker exec -it bitcoin-sphinx-plugin /home/install-bitcoin.sh -u rpcuser -p rpcpassword -v btcversion -P sphinxproxyapi -a allproxy'
+      shell: '/home/install-bitcoin.sh -N coinnet -D datadir -t traefikip -P sphinxproxyapi -I hostip -a allproxy'

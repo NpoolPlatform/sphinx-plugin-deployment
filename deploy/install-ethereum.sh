@@ -49,7 +49,7 @@ function install_eth() {
   if [ "$COIN_NET" == "main" ]; then
     nohup geth --http --datadir $DATA_DIR/ethereum > $DATA_DIR/ethereum/geth.log 2>&1 &
   elif [ "$COIN_NET" == "test" ]; then
-    nohup geth --http  --datadir $DATA_DIR/ethereum --dev --dev.period 1 --mine --miner.threads 2 --http.api 'eth,net,web3,miner,personal'> $DATA_DIR/ethereum/geth.log 2>&1 &
+    nohup geth --http  --datadir $DATA_DIR/ethereum --http.addr $HOST_IP --dev --dev.period 1 --mine --miner.threads 2 --http.api 'eth,net,web3,miner,personal'> $DATA_DIR/ethereum/geth.log 2>&1 &
   fi
 }
 
