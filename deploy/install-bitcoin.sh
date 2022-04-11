@@ -19,7 +19,7 @@ function usage() {
   return 0
 }
 
-while getopts 'D:a:u:p:v:P:t:' OPT; do
+while getopts 'D:a:u:p:v:P:t:N:I:' OPT; do
   case $OPT in
     D) DATA_DIR=$OPTARG           ;;
     a) ALL_PROXY=$OPTARG          ;;
@@ -28,6 +28,8 @@ while getopts 'D:a:u:p:v:P:t:' OPT; do
     v) BTC_VERSION=$OPTARG        ;;
     P) SPHINX_PROXY_ADDR=$OPTARG  ;;
     t) TRAEFIK_IP=$OPTARG         ;;
+    N) COIN_NET=$OPTARG           ;;
+    I) HOST_IP=$OPTARG            ;;
     *) usage $0                   ;;
   esac
 done
