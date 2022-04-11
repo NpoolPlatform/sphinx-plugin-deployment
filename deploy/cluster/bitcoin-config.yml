@@ -15,4 +15,4 @@
       with_items:                          
       - { src: "../install-bitcoin.sh", dest: "/home" }
     - name: install bitcoin sphinx plugin
-      shell: '/home/install-bitcoin.sh -N coinnet -D datadir -t traefikip -P sphinxproxyapi -I hostip -a allproxy'
+      shell: '/home/install-bitcoin.sh -N coinnet -D datadir -u rpcuser -p rpcpassword -v btcversion -t traefikip -P sphinxproxyapi -I hostip -a allproxy'
